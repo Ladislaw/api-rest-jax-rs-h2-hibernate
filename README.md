@@ -6,14 +6,14 @@ por NOME ou CPF.
 
 A api rest utiliza do framework Jersey da Sun que implementa o JAX-RS que define como uma aplicação rest deve ser.
 
-Stack: Maven, Tomcat, Jersey, Hibernate, H2database, JUnit.
+Stack: Maven, Tomcat, Jersey, Hibernate, H2database, Lombok, JUnit.
 
 IDE utilizada: Eclipse.
 
 Primeiro passo criar um projeto "Dynamic Web Aplication", lembrando de dar um checked para criar o arquivo web.xml onde será configurado o servelet em que o Jersey 
 estará trabalhando com as requisições.
 
-Converter o projeto para um projeto Maven e adicionar as depêndencias necessárias do Jersey, Hibernate, H2database e Junit no arquivo pom.xml.
+Converter o projeto para um projeto Maven e adicionar as depêndencias necessárias do Jersey, Hibernate, H2database, Lombok e Junit no arquivo pom.xml.
 
 Configuração do arquivo web.xml adicionando as tags de configuração <servelet> e <servelet-mapping> que são responsáveis por apontar o package que estarão as classes
 que terão os endpoints da aplicação.
