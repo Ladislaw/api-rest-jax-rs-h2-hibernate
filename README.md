@@ -24,4 +24,21 @@ Criar uma classe aplicando o padrão Singleton que será responsável por fornec
 
 Configurar o servidor de aplicação apache Tomcat e adicionar o modulo do projeto ao servidor.
 
-Pronto, todas as configuraçõe necessárias feitas, hora de meter a mão na massa.
+Pronto, todas as configuraçõe necessárias foram feitas.
+  
+Como usar a api:
+  
+  Inserir um objeto pessoa -> Endpoint: http://localhost:8080/webservice/webapi/pessoas
+  {
+    "nome":"Joana",
+    "endereco":"Rua 2 de Julho",
+    "telefone":"75987546245",
+    "bairro":"Praça da Sé",
+    "cidade":"Salvador",
+    "estado":"Bahia",
+    "cpf":"03212154879"
+  }
+  
+  Buscar um objeto pessoa por cpf ou nome através do PathParam -> 
+    Endpoint: http://localhost:8080/webservice/webapi/pessoas/Joana
+    Endpoint: http://localhost:8080/webservice/webapi/pessoas/03212154879
