@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.desafio.jax.ibm.webservice.model.Pessoa;
+import com.desafio.jax.ibm.webservice.dto.PessoaDTO;
 import com.desafio.jax.ibm.webservice.service.PessoaService;
 
 @Path("/pessoas")
@@ -19,20 +19,28 @@ import com.desafio.jax.ibm.webservice.service.PessoaService;
 public class PessoaResource {
 
 	private PessoaService service = new PessoaService();
-	
+
+	/*
+	 * Endpoint responsável por receber requisições para inserir uma pessoa.
+	 * */
 	@POST
-	public Response save(Pessoa pessoa) {
+	public Response save(PessoaDTO pessoa) {
 		pessoa = service.savePessoa(pessoa);
 		return Response.status(Status.CREATED)
 				.entity(pessoa)
 				.build();
 	}
 	
+	
+	/*
+	 * Endpoint responsável por receber requisições para buscar uma pessoa.
+	 * */
 	@GET
 	@Path("{search}")
 	public Response find(@PathParam("search") String search) {
-		return service.findByCpfOrName(search)
-				.map(achou -> Response.ok(achou).build())
-				.orElse(Response.noContent().build());
+		PessoaDTO pessoa = service.findByCpfOrName(search);
+		return Response.status(Status.OK)
+				.entity(pessoa)
+				.build();
 	}
 }

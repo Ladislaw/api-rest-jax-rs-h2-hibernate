@@ -1,31 +1,18 @@
-package com.desafio.jax.ibm.webservice.model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+package com.desafio.jax.ibm.webservice.dto;
 
 import org.modelmapper.ModelMapper;
 
-import com.desafio.jax.ibm.webservice.dto.PessoaDTO;
+import com.desafio.jax.ibm.webservice.model.Pessoa;
 
-@Entity
-public class Pessoa {
+public class PessoaDTO {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull
 	private String nome;
 	private String endereco;
 	private String telefone;
 	private String bairro;
 	private String cidade;
 	private String estado;
-	
-	@NotNull
 	private String cpf;
 	
 	public Long getId() {
@@ -77,8 +64,8 @@ public class Pessoa {
 		this.cpf = cpf;
 	}
 	
-	public PessoaDTO convertEntityToDTO() {
-		return new ModelMapper().map(this, PessoaDTO.class);
+	public Pessoa convertDTOToEntity() {
+		return new ModelMapper().map(this, Pessoa.class);
 	}
 	
 	@Override
@@ -104,7 +91,7 @@ public class Pessoa {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		PessoaDTO other = (PessoaDTO) obj;
 		if (bairro == null) {
 			if (other.bairro != null)
 				return false;

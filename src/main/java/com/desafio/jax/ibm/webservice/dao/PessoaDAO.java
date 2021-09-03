@@ -1,6 +1,6 @@
 package com.desafio.jax.ibm.webservice.dao;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,6 +9,9 @@ import com.desafio.jax.ibm.webservice.model.Pessoa;
 
 public class PessoaDAO {
 
+	/*  
+	 * Método que faz a conexão com banco de dados e consulta.
+	 * */
 	public Pessoa save(Pessoa pessoa) {    
 		Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -24,15 +27,18 @@ public class PessoaDAO {
         return pessoa;
 	}
 	
-	public Optional<Pessoa> findByCpfOrName(String search) {
+	/*  
+	 * Método que faz a conexão com banco de dados e consulta por pessoas.
+	 * */
+	public List<Pessoa> findByCpfOrName(String search) {
 		Transaction transaction = null;
-		Optional<Pessoa> pessoa = null;
+		List<Pessoa> pessoas = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            pessoa = session.createQuery("select p from Pessoa p where p.nome = :name OR p.cpf = :cpf", Pessoa.class)
+            pessoas = session.createQuery("select p from Pessoa p where p.nome = :name OR p.cpf = :cpf", Pessoa.class)
             		.setParameter("name", search)
             		.setParameter("cpf", search)
-            		.uniqueResultOptional();
+            		.getResultList();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -40,6 +46,6 @@ public class PessoaDAO {
             }
             e.printStackTrace();
         }
-        return pessoa;
+        return pessoas;
 	}
 }
